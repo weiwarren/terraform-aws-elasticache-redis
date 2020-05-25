@@ -95,7 +95,7 @@ variable "description" {
 }
 
 variable "notification_topic_arn"{
-  default     = "Managed by Terraform"
+  default     = ""
   type        = string
   description = "The SNS notificaiton arn."
 }
