@@ -9,7 +9,6 @@ resource "aws_elasticache_replication_group" "default" {
   subnet_group_name       = aws_elasticache_subnet_group.default.name
   security_group_ids      = [aws_security_group.default.id]
 
-  notification_topic_arn  =  var.sns_topic_arn
   # The replication group identifier. This parameter is stored as a lowercase string.
   #
   # - Must contain from 1 to 20 alphanumeric characters or hyphens.
@@ -88,6 +87,9 @@ resource "aws_elasticache_replication_group" "default" {
 
   # A user-created description for the replication group.
   replication_group_description = var.description
+
+  # SNS notificaiton arn
+  notification_topic_arn  =  var.notification_topic_arn
 
   # A mapping of tags to assign to the resource.
   tags = merge({ "Name" = var.name }, var.tags)
