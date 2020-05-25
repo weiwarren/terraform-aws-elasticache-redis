@@ -4,11 +4,12 @@
 
 # https://www.terraform.io/docs/providers/aws/r/elasticache_replication_group.html
 resource "aws_elasticache_replication_group" "default" {
-  engine               = "redis"
-  parameter_group_name = aws_elasticache_parameter_group.default.name
-  subnet_group_name    = aws_elasticache_subnet_group.default.name
-  security_group_ids   = [aws_security_group.default.id]
+  engine                  = "redis"
+  parameter_group_name    = aws_elasticache_parameter_group.default.name
+  subnet_group_name       = aws_elasticache_subnet_group.default.name
+  security_group_ids      = [aws_security_group.default.id]
 
+  notification_topic_arn  =  var.sns_topic_arn
   # The replication group identifier. This parameter is stored as a lowercase string.
   #
   # - Must contain from 1 to 20 alphanumeric characters or hyphens.
