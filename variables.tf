@@ -94,6 +94,11 @@ variable "description" {
   description = "The description of the all resources."
 }
 
+variable "notification_topic_arn"{
+  default     = "Managed by Terraform"
+  type        = string
+  description = "The SNS notificaiton arn."
+}
 variable "tags" {
   default     = {}
   type        = map(string)
