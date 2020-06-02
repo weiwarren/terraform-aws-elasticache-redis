@@ -23,6 +23,7 @@ resource "aws_elasticache_replication_group" "default" {
   # If automatic_failover_enabled is true, the value of this parameter must be at least 2.
   # The maximum permitted value for number_cache_clusters is 6 (1 primary plus 5 replicas).
   # https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.RedisReplGrps.html
+  
   number_cache_clusters = var.number_cache_clusters
 
   # The compute and memory capacity of the nodes in the node group (shard).
@@ -93,6 +94,13 @@ resource "aws_elasticache_replication_group" "default" {
 
   # A mapping of tags to assign to the resource.
   tags = merge({ "Name" = var.name }, var.tags)
+
+  lifecycle {
+    ignore_changes = [
+      number_cache_clusters,
+      tags
+    ]
+  }
 }
 
 # https://www.terraform.io/docs/providers/aws/r/elasticache_parameter_group.html
